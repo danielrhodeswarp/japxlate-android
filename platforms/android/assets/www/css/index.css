@@ -1,0 +1,250 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+* {
+    /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+    -webkit-tap-highlight-color: rgba(0,0,0,0); 
+}
+
+body {
+    -webkit-touch-callout: none;            /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;         /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;              /* prevent copy paste, to allow, change 'none' to 'text' */
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    /*font-size:12px;*/
+    font-size:16px;
+    height:100%;
+    margin:0px;
+    padding:0px;
+    width:100%;
+    /*word-wrap: break-word;*/
+    /*background-color:#eee;*/
+}
+
+header {
+    background-color:#555;  /*medium grey*/
+    color:#ccc;             /*slightly greyish white*/
+    height:40px;
+    line-height:40px;       /*height of a *text* line*/
+}
+
+footer {
+    background-color:#555;
+    color:#ccc;
+    height:2px;             /*down to 2px from 20px*/          
+    line-height:20px;
+    position:absolute;
+    bottom:0;
+    width:100%;
+}
+
+canvas {
+    border:1px solid grey;
+    background-color:#ffa;  /*Post-It yellow*/
+    margin-left:auto;       /*these two lines will*/
+    margin-right:auto;      /*centre the element horizontally*/
+    display:block;
+    position:relative;  /*new*/
+}
+
+/*entire tab row*/
+#tab-bar {
+    /*clear any inside and outside gap space*/
+    margin:0;
+    padding:0;
+}
+
+/*each tab*/
+#tab-bar li {
+    display: inline;    /*prevent each item from newlining*/
+    float:left;         /*stack left*/
+    width: 33.3333%;    /*have a third of total tab-bar space*/
+    border-bottom:2px solid #555;   /*same bg as header*/
+}
+
+/*tappable link in each tab*/
+#tab-bar li a { 
+    color: #ccc;
+    display: block;         /*make "width-having"*/
+    font-weight: bold;
+    overflow: hidden;       /*so long link text words get cropped*/
+    /*position: relative;*/
+    text-align: center;
+    text-decoration: none;  /*remove default link underline*/
+}
+
+/*current tab*/
+#tab-bar li.current {
+    border-bottom:2px solid #990000;    /*signature red*/
+}
+
+/*simulate a border-left for the middle and rightmost tab*/
+#tab-bar li + li {
+    background-image:url(../img/aaaaaa_16_v.png);
+    background-repeat:repeat-y;
+    background-position:left;
+}
+
+a img, button img {
+    vertical-align:middle;      /*make more sensible relative to text baseline*/
+}
+
+input[type="text"], button {
+    height:30px;
+    margin:0;
+}
+
+iframe {
+    width:100%;
+    max-height:100%;
+}
+
+#twitter-iframe-container {
+    position:absolute;  /*can now position relative to .japxlate_app which is*/
+    top:0;              /*this div's first non-static parent*/
+    bottom:0;
+    width:100%;
+    overflow:hidden;    /*clip overflowing content*/
+}
+
+#tab-content > div.current {
+    display:block;
+}
+
+#tab-content > div {
+    display:none;
+}
+
+.japxlate_app {
+    padding-top:1em;
+    overflow:auto;          /*scrolling functionality *IF* we need it*/
+    position:absolute;
+    top:42px;               /*flush with bottom of header*/
+    bottom:2px;             /*flush with top of footer*/
+    width:100%;
+}
+
+#results-wrapper {
+    position:static;
+    width:100%;
+    margin-top:1em;     /*space one <br>(ish) from bottom of search form*/
+    overflow:hidden;
+    /*border:1px solid green;*/
+}
+
+#search-results {
+    position:relative;  /*we position this relative to its *normal* position*/
+    top:0;              /*but set the normal top position anyway. We will*/
+    width:100%;         /*change this top value to affect a scroll*/
+    /*border:1px solid red;*/
+}
+
+#write-intro {
+    position:absolute;
+    top:0;              /*absolute top of .japxlate_app*/
+    height:40px;        /*make arbitrarily big enough for our 2em character*/
+    width:100%;
+    margin-bottom:0;    /*so #write-canvas-container is flush*/
+    margin-top:10px;     /*so we aren't directly under the navigation tabs*/
+    text-align:center;  /*centre text horizontally*/
+    /*background-color:green;*/
+}
+
+#write-canvas-container {
+    position:absolute;
+    top:50px;           /*make flush with #write-intro*/
+    bottom:40px;        /*stop 40px up from the botton of .japxlate_app*/
+    width:100%;    
+}
+
+#write-buttons {
+    position:absolute;
+    bottom:0;           /*absolute bottom of .japxlate_app*/
+    height:40px;        /*make flush with bottom of #write-canvas-container*/
+    width:100%;
+}
+
+/* Portrait layout (default) */
+.app {
+    background:url(../img/logo.png) no-repeat center top; /* 170px x 200px */
+    position:absolute;             /* position in the center of the screen */
+    left:50%;
+    top:50%;
+    height:50px;                   /* text area height */
+    width:225px;                   /* text area width */
+    text-align:center;
+    padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
+    margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
+                                   /* offset horizontal: half of text area width */
+}
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+    .app {
+        background-position:left center;
+        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
+        margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
+                                      /* offset horizontal: half of image width and text area width */
+    }
+}
+
+h1 {
+    font-size:24px;
+    font-weight:normal;
+    margin:0px;
+    overflow:visible;
+    padding:0px;
+    text-align:center;
+}
+
+.event {
+    border-radius:4px;
+    -webkit-border-radius:4px;
+    color:#FFFFFF;
+    font-size:12px;
+    margin:0px 30px;
+    padding:2px 0px;
+}
+
+.event.listening {
+    background-color:#333333;
+    display:block;
+}
+
+.event.received {
+    background-color:#4B946A;
+    display:none;
+}
+
+@keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+ 
+@-webkit-keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+ 
+.blink {
+    animation:fade 3000ms infinite;
+    -webkit-animation:fade 3000ms infinite;
+}

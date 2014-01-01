@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributeds with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" blubby=", target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Japxlate</title>
+    </head>
+    <body>
+        <header>
+            <ul id="tab-bar">
+                <li class="current">
+                    <a href="#search" data-div-id="search"><img src="img/search.png"> Search</a>
+                </li>
+                <li >
+                    <a href="#discover" data-div-id="discover"><img src="img/chat-bubble.png"> Discover</a>
+                </li>
+                <li>
+                    <a href="#write" data-div-id="write"><img src="img/file.png"> Write</a>
+                </li>
+            </ul>
+        </header>
+        <div class="japxlate_app">
+            <div id="tab-content">
+                <div id="search" class="current">
+                    <div id="search-form">
+                        <button type="button" id="search-button" style="float:right; width:45%; margin-right:1%;">
+                            <img src="img/search.png">
+                            Search
+                            <img id="button-spinner" src="img/spinner.gif" style="visibility:hidden;">
+                        </button>
+                        <input type="text" id="search-query" placeholder="Japanese or English" size="40"
+                               style="width:45%; margin-left:1%;">
+                        <br>
+                        <span id="loading-text">
+                            [Loading core dictionary. This takes a while the first time.
+                            <img src="img/spinner.gif">]
+                        </span>
+                    </div>
+                    <div id="results-wrapper">
+                        <div id="search-results">
+                            You can search by kanji, hiragana, katakana, English or romaji!
+                        </div>
+                    </div>
+                </div>
+                <div id="discover">
+                    <div id="twitter-iframe-container">
+                        <a class="twitter-timeline" href="https://twitter.com/japxlate" data-widget-id="378630691635728384" data-chrome="nofooter noheader" data-tweet-limit="20">Tweets by @japxlate (network connection required) <img src="img/spinner.gif"></a>
+                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                    </div>
+                </div>
+                <div id="write">
+                    <p id="write-intro">Write this character: <span style="font-size:2em;" id="char-to-write"></span>
+                                <span id="char-explanation"></span>
+                    </p>
+                    <div id="write-canvas-container">
+                        <!--<canvas id="paper" width="300" height="300"></canvas>-->
+                    </div>
+                    <div id="write-buttons">
+                        <button type="button" id="canvas-clear" style="width:45%; margin-right:1%; float:right;">
+                            <img src="img/paste.png"> Clear
+                        </button>
+                        <button type="button" id="canvas-new" style="width:45%; margin-left:1%;">
+                            <img src="img/file.png"> New character
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer></footer>
+        <!--load phonegap.js only if on mobile device-->
+        <script type="text/javascript">
+            if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
+                var line = '<script type="text/javascript" src="phonegap.js"' + '></'+'script>';
+                document.writeln(line);
+            }
+        </script>
+        <script type="text/javascript" src="js/linguistics.js"></script>
+        <script type="text/javascript" src="js/search_interface.js"></script>
+        <script type="text/javascript" src="js/websql_edict_inserts.js"></script>
+        <script type="text/javascript" src="js/websql_core.js"></script>
+        <script type="text/javascript" src="js/websql_search.js"></script>
+        <script type="text/javascript" src="js/japxlate.js"></script>
+        <script type="text/javascript" src="js/canvas.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
+</html>
